@@ -32,3 +32,5 @@ class BlogController {
     }
 
 }
+
+module.exports = BlogController

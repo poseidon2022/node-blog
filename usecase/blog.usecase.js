@@ -1,4 +1,4 @@
-const Blog = require("./domain/domain.js")
+const Blog = require("../domain/domain")
 class BlogUseCase {
     constructor(blogRepository) {
         this.blogRepository = blogRepository
