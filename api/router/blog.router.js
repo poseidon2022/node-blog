@@ -12,6 +12,6 @@ router.post("/create", (req, res) => blogController.CreateBlog(req, res))
 router.patch("/update/:blog_id", (req, res) => blogController.UpdateBlog(req, res))
 router.delete("/delete/:blog_id", (req, res) => blogController.DeleteBlog(req, res))
 router.get("/getblog/:blog_id", (req, res) => blogController.GetBlogByID(req, res))
-router.get("getblogs", (req,res) => blogController.GetAllBlogs(req, res))
+router.get("/getblogs", (req,res) => blogController.GetAllBlogs(req, res))
 
 module.exports = router

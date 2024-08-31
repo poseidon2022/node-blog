@@ -34,14 +34,20 @@ class BlogUseCase {
         }
     }
 
+    async GetBlogByID(blog_id)  {
+        try {
+            const returnedBlog = await this.blogRepository.GetBlogByID(blog_id)
+            return returnedBlog
+        } catch(err) {
+            console.log(err)
+            throw new Error("Error while deleting blog")
+        }
+    }
+
+
     GetAllBlogs() {
 
     }
-
-    GetBlogByID(blogID)  {
-
-    }
-
 
     FilterBlog(tags, likeLowerRange, viewLowerRange, date) {
 

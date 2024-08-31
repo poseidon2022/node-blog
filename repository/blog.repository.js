@@ -36,12 +36,24 @@ class BlogRepository {
             throw new Error('Error while trying to delete on DB');
         }
     }
-    
-    GetAllBlogs() {
+
+    GetBlogByID(blog_id)  {
+        const objectID = new mongoose.Types.ObjectId(blog_id)
+
+        try {
+            const returnedBlog = Blog.findById(objectID)
+            if (!returnedBlog) {
+                throw new Error("Blog not found")
+            }
+            return returnedBlog
+        } catch(err) {
+            console.error(err.message)
+            throw new Error("Error while getting blog from DB")
+        }
 
     }
-
-    GetBlogByID(blogID)  {
+    
+    GetAllBlogs() {
 
     }
 

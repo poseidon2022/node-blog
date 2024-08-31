@@ -59,11 +59,20 @@ class BlogController {
         }
     }
 
-    GetAllBlogs(req, res) {
+    async GetBlogByID(req, res)  {
+        const blog_id = req.params["blog_id"]
+
+        try {
+            const returnedBlog = await this.blogUseCase.GetBlogByID(blog_id)
+            res.json({message : returnedBlog})
+        }
+        catch(err) {
+            res.status(500).json({message : err.message})
+        }
 
     }
 
-    GetBlogByID(req, res)  {
+    GetAllBlogs(req, res) {
 
     }
 
