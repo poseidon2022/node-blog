@@ -47,15 +47,23 @@ class BlogController {
         }
     }
 
+    async DeleteBlog(req, res) {
+        const blog_id = req.params["blog_id"]
+
+        try {
+            const deletedBlog = await this.blogUseCase.DeleteBlog(blog_id)
+            res.json({message : deletedBlog})
+        }
+        catch(err) {
+            res.status(500).json({message : err.message})
+        }
+    }
+
     GetAllBlogs(req, res) {
 
     }
 
     GetBlogByID(req, res)  {
-
-    }
-
-    DeleteBlog(req, res) {
 
     }
 

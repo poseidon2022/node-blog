@@ -22,16 +22,26 @@ class BlogRepository {
             throw new Error('Error while trying to update on DB');
         }
     }
+
+    async DeleteBlog(blog_id) {
+        const objectID = new mongoose.Types.ObjectId(blog_id);
+        try {
+            const deleteBlog = await Blog.findByIdAndDelete(objectID);  
+            if (!deleteBlog) {
+                throw new Error('Blog not found');
+            }
+            return deleteBlog;
+        } catch (err) {
+            console.log(err)
+            throw new Error('Error while trying to delete on DB');
+        }
+    }
     
     GetAllBlogs() {
 
     }
 
     GetBlogByID(blogID)  {
-
-    }
-
-    DeleteBlog(blogID, userID, role) {
 
     }
 

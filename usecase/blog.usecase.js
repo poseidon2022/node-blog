@@ -24,6 +24,16 @@ class BlogUseCase {
 
     }
 
+    async DeleteBlog(blog_id) {
+        try {
+            const deleteBlog = await this.blogRepository.DeleteBlog(blog_id)
+            return deleteBlog
+        } catch(err) {
+            console.log(err)
+            throw new Error("Error while deleting blog")
+        }
+    }
+
     GetAllBlogs() {
 
     }
@@ -32,9 +42,6 @@ class BlogUseCase {
 
     }
 
-    DeleteBlog(blogID, userID, role) {
-
-    }
 
     FilterBlog(tags, likeLowerRange, viewLowerRange, date) {
 
