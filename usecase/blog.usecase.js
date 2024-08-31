@@ -4,11 +4,23 @@ class BlogUseCase {
     }
     
     async CreateBlog(newBlog) {
-        const createdBlog = await this.blogRepository.CreateBlog(newBlog)
-        return createdBlog
+        try {
+            const createdBlog = await this.blogRepository.CreateBlog(newBlog)
+            return createdBlog
+        } catch(err) {
+            throw new Error("Error while trying to create blog")
+        }
     }
 
-    UpdateBlog(title, content, tags) {
+    async UpdateBlog(updatedBlog, blog_id) {
+
+        try {
+            const updateBlog = await this.blogRepository.UpdateBlog(updatedBlog, blog_id)
+            return updateBlog
+        } catch(err) {
+            console.log(err)
+            throw new Error("Error while updating blog")
+        }
 
     }
 
