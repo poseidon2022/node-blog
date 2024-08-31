@@ -1,22 +1,23 @@
 const mongoose = require("mongoose")
 const blogSchema = new mongoose.Schema({
-    _id : {
-        type : mongoose.Schema.Types.ObjectId,
-    },
     user_id : {
         type : mongoose.Schema.Types.ObjectId,
     },
     title : {
         type : String,
+        required : true,
     },
     content : {
         type : String,
+        required : true
     },
     author : {
         type : String,
+        required : true
     },
     tags : {
         type : [String],
+        required : true
     },
     average_rating: {
         type: Number,
