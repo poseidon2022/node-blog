@@ -7,3 +7,5 @@ class blog {
         this.tags = tags
     }
 }
+
+module.exports = blog
