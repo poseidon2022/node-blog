@@ -1,11 +1,11 @@
-const Blog = require("../domain/domain")
 class BlogUseCase {
     constructor(blogRepository) {
         this.blogRepository = blogRepository
     }
     
-    CreateBlog(title, content, tags) {
-
+    async CreateBlog(newBlog) {
+        const createdBlog = await this.blogRepository.CreateBlog(newBlog)
+        return createdBlog
     }
 
     UpdateBlog(title, content, tags) {

@@ -1,6 +1,7 @@
 class BlogRepository {
-    CreateBlog(title, content, tags) {
-
+    async CreateBlog(newBlog) {
+        await newBlog.save()
+        return newBlog
     }
 
     UpdateBlog(title, content, tags) {
