@@ -24,7 +24,13 @@ class BlogLikeController {
     }
 
     async UnlikeBlog(req, res) {
-
+        const like_id = req.params.id
+        try {
+            const unliked = await this.blogLikeUseCase.UnlikeBlog(like_id)
+            res.status(200).json({message : unliked})
+        } catch(err) {
+            res.status(500).json({error : "intenal server error"})
+        }
     }
 
     async GetByID(req, res) {
