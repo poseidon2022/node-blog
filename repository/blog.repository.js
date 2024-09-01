@@ -79,6 +79,20 @@ class BlogRepository {
 
     }
 
+    async UpdateLikeCount(blog_id, increment) {
+        try {
+            if (increment) {
+                await Blog.findByIdAndUpdate(blog_id, {$inc : {like_count : 1}})
+            } else {
+                await Blog.findByIdAndUpdate(blog_id, {$inc : {like_count : -1}})
+            }
+        } catch(err) {
+            console.error(err)
+            throw new Error("error while updating like count")
+        }
+
+    }
+
     FilterBlog(tags, likeLowerRange, viewLowerRange, date) {
 
     }
