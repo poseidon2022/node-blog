@@ -32,16 +32,25 @@ class BlogCommentController {
 
     async UpdateComment(req, res) {
         const comment_id = req.params.id
-        comment_id = new mongoose.Types.ObjectId(comment_id)
+        const objectID = new mongoose.Types.ObjectId(comment_id)
+        const {content} = req.body
         try {
-
+            const updatedComment = await this.blogCommentUseCase.UpdateComment(content, objectID)
+            res.json({message : updatedComment})
         } catch(err) {
             res.status(500).json({error : "internal server error"})
         }
     }
 
     async DeleteComment(req, res) {
-        
+        const comment_id = req.params.id
+        const objectID = new mongoose.Types.ObjectId(comment_id)
+        try {
+            const deletedComment = await this.blogCommentUseCase.DeleteComment(objectID)
+            res.json({message : deletedComment})
+        } catch(err) {
+            res.status(500).json({error : "internal server error"})
+        }
     }
 
 }

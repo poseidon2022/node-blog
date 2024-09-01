@@ -15,12 +15,21 @@ class BlogCommentUseCase {
     }
 
     async UpdateComment(content, comment_id) {
-        
-
+        try {
+            const updatedComment = await this.blogCommentRepository.UpdateComment(content, comment_id)
+            return updatedComment
+        } catch(error) {
+            throw new Error("error while updating comment")
+        }
     }
 
     async DeleteComment(commentID) {
-
+        try {
+            const deletedComment = await this.blogCommentRepository.DeleteComment(commentID)
+            return deletedComment
+        } catch(error) {
+            throw new Error("error while deleting comment")
+        }
     }
 }
 

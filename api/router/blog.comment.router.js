@@ -13,8 +13,8 @@ const blogCommentUseCase = new BlogCommentUseCase(blogCommentRepository, blogRep
 const blogCommentController = new BlogCommentController(blogCommentUseCase)
 
 router.post("/:blog_id/comment/", (req, res) => blogCommentController.CreateComment(req, res))
-router.patch("/:blog_id/comment/:id", (req, res) => blogCommentController.UpdateComment(req, res))
-router.delete("/:blog_id/comment/:id", (req, res) =>  blogCommentController.DeleteComment(req, res))
+router.patch("/comment/:id", (req, res) => blogCommentController.UpdateComment(req, res))
+router.delete("/comment/:id", (req, res) =>  blogCommentController.DeleteComment(req, res))
 
 module.exports = router
 
