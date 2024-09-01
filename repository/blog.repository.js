@@ -65,6 +65,20 @@ class BlogRepository {
         }
     }
 
+    async UpdateCommentCount(blog_id, increment) {
+        try {
+            if (increment) {
+                await Blog.findByIdAndUpdate(blog_id, {$inc : {comment_count : 1}})
+            } else {
+                await Blog.findByIdAndUpdate(blog_id, {$inc : {comment_count : -1}})
+            }
+        } catch(err) {
+            console.error(err)
+            throw new Error("error while updating comment count")
+        }
+
+    }
+
     FilterBlog(tags, likeLowerRange, viewLowerRange, date) {
 
     }

@@ -18,7 +18,7 @@ app.use(express.json())
 
 const PORT = process.env.PORT || 3000
 app.use("/api/blog", blogRouter)
-app.use("/api/blog/:blog_id/comment", commentRouter)
+app.use("/api/blog", commentRouter)
 app.listen(PORT, () => {
     console.log(`app running on port ${PORT}`)
 })

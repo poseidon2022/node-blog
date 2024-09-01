@@ -6,19 +6,22 @@ class BlogCommentController {
     }
 
     async CreateComment(req, res) {
-        const blog_id = req.params["blog_id"]
+        const blog_id = req.params.blog_id
+        console.log(req.params)
         // TODO : get the user ID from req.user.userid man.
         //for now with a demo user ID 
-        const user_id = mongoose.Types.ObjectId()
+        const user_id = new mongoose.Types.ObjectId()
+        console.log(blog_id)
+        const blogObjectID = new mongoose.Types.ObjectId(blog_id)
         const {content} = req.body
         try {
             const newComment = new Comment({
                 user_id : user_id,
-                blog_id : blog_id,
+                blog_id : blogObjectID,
                 content : content
             })
 
-            const createdComment = await blogCommentUseCase.createdComment(createdComment)
+            const createdComment = await this.blogCommentUseCase.CreateComment(newComment)
             res.json({message : createdComment})
         }
         catch(err) {
@@ -28,7 +31,13 @@ class BlogCommentController {
     }
 
     async UpdateComment(req, res) {
+        const comment_id = req.params.id
+        comment_id = new mongoose.Types.ObjectId(comment_id)
+        try {
 
+        } catch(err) {
+            res.status(500).json({error : "internal server error"})
+        }
     }
 
     async DeleteComment(req, res) {

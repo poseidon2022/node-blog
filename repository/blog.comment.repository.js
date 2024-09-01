@@ -1,6 +1,14 @@
 class BlogCommentRepository {
 
     async CreateComment(newComment) {
+        try {
+            await newComment.save()
+            return newComment
+        }
+        catch(err) {
+            console.error(err.message)
+            throw new Error("error while adding blog to DB")
+        }
 
     }
 
