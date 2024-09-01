@@ -3,6 +3,7 @@ const cors = require("cors")
 require("dotenv").config()
 const mongoose = require("mongoose")
 const blogRouter = require("./api/router/blog.router.js")
+const commentRouter = require("./api/router/blog.comment.router.js")
 
 mongoose.connect(process.env.DATABASEURI)
 .then(() => {
@@ -17,6 +18,7 @@ app.use(express.json())
 
 const PORT = process.env.PORT || 3000
 app.use("/api/blog", blogRouter)
+app.use("/api/blog/:blog_id/comment", commentRouter)
 app.listen(PORT, () => {
     console.log(`app running on port ${PORT}`)
 })
