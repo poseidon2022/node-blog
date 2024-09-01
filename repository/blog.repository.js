@@ -37,24 +37,32 @@ class BlogRepository {
         }
     }
 
-    GetBlogByID(blog_id)  {
+    async GetBlogByID(blog_id)  {
         const objectID = new mongoose.Types.ObjectId(blog_id)
 
         try {
-            const returnedBlog = Blog.findById(objectID)
+            const returnedBlog = await Blog.findById(objectID)
             if (!returnedBlog) {
                 throw new Error("Blog not found")
+
             }
+
             return returnedBlog
         } catch(err) {
-            console.error(err.message)
-            throw new Error("Error while getting blog from DB")
+            throw new Error(err.message)
         }
 
     }
     
-    GetAllBlogs() {
+   async GetAllBlogs() {
+        try {
+            const allBlogs = await Blog.find()
+            return allBlogs
 
+        } catch(err) {
+            console.error(err.message)
+            throw new Error("Error while getting blogs from DB")
+        }
     }
 
     FilterBlog(tags, likeLowerRange, viewLowerRange, date) {

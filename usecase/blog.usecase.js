@@ -40,13 +40,21 @@ class BlogUseCase {
             return returnedBlog
         } catch(err) {
             console.log(err)
+            if (err.message == "Blog not found") {
+                throw new Error("Blog not found")
+            }
             throw new Error("Error while deleting blog")
         }
     }
 
-
-    GetAllBlogs() {
-
+    async GetAllBlogs() {
+        try {
+            const allBlogs = await this.blogRepository.GetAllBlogs()
+            return allBlogs
+        } catch(err) {
+            console.log(err)
+            throw new Error("Error while fetching blogs")
+        }
     }
 
     FilterBlog(tags, likeLowerRange, viewLowerRange, date) {

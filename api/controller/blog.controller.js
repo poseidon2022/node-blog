@@ -67,12 +67,23 @@ class BlogController {
             res.json({message : returnedBlog})
         }
         catch(err) {
-            res.status(500).json({message : err.message})
+            if (err.message == "Blog not found") {
+                res.status(404).json({error : err.message})
+                return
+            }
+            res.status(500).json({error : err.message})
         }
-
     }
 
-    GetAllBlogs(req, res) {
+    async GetAllBlogs(req, res) {
+        try {
+            const allBlogs = await this.blogUseCase.GetAllBlogs() 
+            res.json({message : allBlogs})
+        }
+        catch(err) {
+            console.error(err)
+            res.status(500).json("error while fetching blogs")
+        }
 
     }
 
