@@ -26,7 +26,14 @@ class BlogLikeUseCase {
     }
 
     async GetByID(user_id, blog_id) {
-
+        try {
+            const foundLikes = await this.blogLikeRepository.GetByID(user_id, blog_id)
+            await this.blogLikeRepository.GetByID(user_id, blog_id)
+            return foundLikes
+        } catch(err) {
+            console.log(err.message)
+            throw new Error(err.message)
+        }
     }
 }
 

@@ -44,9 +44,7 @@ class BlogRepository {
             const returnedBlog = await Blog.findById(objectID)
             if (!returnedBlog) {
                 throw new Error("Blog not found")
-
             }
-
             return returnedBlog
         } catch(err) {
             throw new Error(err.message)

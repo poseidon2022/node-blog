@@ -21,7 +21,16 @@ class BlogLikeRepository {
     }
 
     async GetByID(user_id, blog_id) {
-
+        try {
+            const foundLike = await Like.find({user_id : user_id, blog_id : blog_id})
+            if (!foundLike) {
+                throw new Error("Like not found")
+            }
+            return foundLike
+        } catch(err) {
+            console.error(err.message)
+            throw new Error(err.message)
+        }
     }
 }
 
