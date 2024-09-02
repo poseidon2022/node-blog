@@ -8,6 +8,10 @@ const ratingSchema = new mongoose.Schema({
         type : mongoose.Types.ObjectId,
         required : true
     },
+    user_id : {
+        type : mongoose.Types.ObjectId,
+        required : true
+    },
     rating : {
         type : Number,
         min : 0,
@@ -15,3 +19,6 @@ const ratingSchema = new mongoose.Schema({
         default : 0,
     }
 }, {timestamps : true})
+
+const Rating = mongoose.model("ratings", ratingSchema)
+module.exports = Rating
