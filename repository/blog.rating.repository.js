@@ -1,10 +1,27 @@
+const Rating = require("../models/blog.rating.model")
 class BlogRatingRepository {
 
     async InsertRating(newRating) {
+        try {
+            await newRating.save()
+            return newRating
+        } catch(err) {
+            console.error(err.message)
+            throw new Error("error while inserting rating to DB")
+        }
 
     }
 
     async UpdateRating(rating_id, rating) {
+        try {
+            const prevRating = await Rating.findByIdAndUpdate(rating_id, {$set : {rating : rating}})
+            if (!prevRating) {
+                throw new Error("rating not found")
+            }
+            return prevRating
+        } catch(err) {
+            throw new Error(err.message)
+        }
 
     }
 
@@ -13,4 +30,4 @@ class BlogRatingRepository {
     }
 }
 
-module.ezports = BlogRatingRepository
+module.exports = BlogRatingRepository

@@ -88,7 +88,6 @@ class BlogRepository {
             console.error(err)
             throw new Error("error while updating like count")
         }
-
     }
 
     FilterBlog(tags, likeLowerRange, viewLowerRange, date) {
@@ -97,6 +96,30 @@ class BlogRepository {
 
     SearchBlog(title, author) {
         
+    }
+
+    async InsertRating(insertedRating) {
+        try {
+            let updatedBlog = await Blog.findByIdAndUpdate(insertedRating.blog_id, 
+                {$inc : {total_rating : insertedRating.rating, 
+                rating_count : 1}})
+            const updatedAverageRating = parseFloat(((updatedBlog.total_rating + insertedRating.rating)  / (updatedBlog.rating_count + 1)).toFixed(1))
+            updatedBlog = await Blog.findByIdAndUpdate(insertedRating.blog_id, {$set : {average_rating : updatedAverageRating}})
+        } catch(err) {
+            console.error("error while updating rating on DB")
+            throw new Error("error while updating rating on DB")
+        }
+    }
+
+    async UpdateRating(rating, prevRating) {
+        try {
+            let prevBlog = await Blog.findByIdAndUpdate(prevRating.blog_id, {$inc : {total_rating : rating - prevRating.rating}})
+            const updatedAverageRating = parseFloat(((prevBlog.total_rating + rating - prevRating.rating)  / prevBlog.rating_count).toFixed(1))
+            prevBlog = await Blog.findByIdAndUpdate(prevRating.blog_id, {$set : {average_rating : updatedAverageRating}})
+        } catch(err) {
+            console.error(err.message)
+            throw new Error("error while updating rating on DB")
+        }
     }
 }
 

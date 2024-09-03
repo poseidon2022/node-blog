@@ -1,4 +1,4 @@
-const express = require("ecpress")
+const express = require("express")
 const BlogRepository = require("../../repository/blog.repository")
 const BlogRatingRepository = require("../../repository/blog.rating.repository")
 const BlogRatingUseCase = require("../../usecase/blog.rating.usecase")
