@@ -26,6 +26,13 @@ class BlogRatingRepository {
     }
 
     async DeleteRating(rating_id) {
+        try {
+            const deletedRating = await Rating.findByIdAndDelete(rating_id)
+            return deletedRating
+        } catch(err) {
+            console.error(err.message)
+            throw new Error("error while deleting rating from DB")
+        }
         
     }
 }

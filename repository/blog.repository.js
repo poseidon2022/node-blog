@@ -121,6 +121,22 @@ class BlogRepository {
             throw new Error("error while updating rating on DB")
         }
     }
+
+
+    async DeleteRating(deletedRating) {
+        try {
+            let prevBlog = await Blog.findByIdAndUpdate(deletedRating.blog_id, {$inc : {total_rating : -1 * deletedRating.rating, rating_count : -1}})
+            if (prevBlog.rating_count - 1 == 0) {
+                await Blog.findByIdAndUpdate(deletedRating.blog_id, {$set : {average_rating : 0}})
+                return
+            }
+            const average_rating = parseFloat(((prevBlog.total_rating - deletedRating.rating)  / (prevBlog.rating_count - 1)).toFixed(1))
+            await Blog.findByIdAndUpdate(deletedRating.blog_id, {$set : {average_rating : average_rating}})
+        } catch(err) {
+            console.error(err.message)
+            throw new Error("error while deleting on DB")
+        }
+    }
 }
 
 module.exports = BlogRepository

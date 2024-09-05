@@ -44,7 +44,8 @@ class BlogRatingController {
     }
 
     async DeleteRating(req, res) {
-        const rating_id = req.params.id
+        let rating_id = req.params.id
+        rating_id = new mongoose.Types.ObjectId(rating_id)
         try {
             const deletedRating = await this.blogRatingUseCase.DeleteRating(rating_id)
             res.json({message : deletedRating})

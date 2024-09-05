@@ -28,6 +28,13 @@ class BlogRatingUseCase {
     }
 
     async DeleteRating(rating_id) {
+        try {
+            const deletedRating = await this.blogRatingRepository.DeleteRating(rating_id)
+            await this.blogRepository.DeleteRating(deletedRating)
+            return deletedRating
+        } catch(err) {
+            throw new Error("error while deletting rating")
+        }
 
     }
 }
