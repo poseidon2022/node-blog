@@ -92,8 +92,22 @@ class BlogController {
 
     }
 
-    SearchBlog(req, res) {
-
+    async SearchBlog(req, res) {
+        const author = req.query.author
+        const title = req.query.title
+        try {
+            if (author == "" && title == "") {
+                res.status(400).json({message : "invalid request format"})
+            }
+            const foundBlog = await this.blogUseCase.SearchBlog(title, author)
+            res.status(200).json({message : foundBlog})
+            
+        } catch(err) {
+            if (err.message == "No blogs found") {
+                res.status(204).json({message : err.message})
+            }
+            res.status(500).json({message : "internal server error"})
+        }
     }
 
 }
