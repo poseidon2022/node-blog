@@ -61,7 +61,13 @@ class BlogUseCase {
 
     }
 
-    SearchBlog(title, author) {
+    async SearchBlog(title, author) {
+        try {
+            const foundBlogs = await this.blogRepository.SearchBlog(title, author)
+            return foundBlogs
+        } catch(err) {
+            throw new Error("error while searching for blogs")
+        }
 
     }
 }
