@@ -90,11 +90,29 @@ class BlogRepository {
         }
     }
 
-    FilterBlog(tags, likeLowerRange, viewLowerRange) {
+    async FilterBlog(tags, likeLowerRange, viewLowerRange) {
         try {
+            const filter = {}
+            filter.like_count = {$gt : likeLowerRange}
+            filter.view_count = {$gt : viewLowerRange}
+            if (tags.length > 0) {
+                const tagFilters = tags.map(tag  => (
+                    {tags : {$elemMatch : {$regex : new RegExp(tag, 'i')}}}
+                ))
 
+                console.log(tagFilters)
+                filter.$and = tagFilters
+            }
+
+            console.log(filter)
+            const foundBlog = await Blog.find(filter)
+            if (!foundBlog) {
+                throw new Error("No blogs found")
+            }
+
+            return foundBlog
         } catch(err) {
-            console.error(err.message)
+            console.error(err)
             throw new Error(err.message)
         }
     }

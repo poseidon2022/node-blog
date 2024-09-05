@@ -14,5 +14,6 @@ router.delete("/delete/:blog_id", (req, res) => blogController.DeleteBlog(req, r
 router.get("/getblog/:blog_id", (req, res) => blogController.GetBlogByID(req, res))
 router.get("/getblogs", (req,res) => blogController.GetAllBlogs(req, res))
 router.get("/search", (req, res) => blogController.SearchBlog(req, res))
+router.get("/filter", (req, res) => blogController.FilterBlog(req, res))
 
 module.exports = router
