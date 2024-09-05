@@ -57,10 +57,15 @@ class BlogUseCase {
         }
     }
 
-    FilterBlog(tags, likeLowerRange, viewLowerRange) {
-
+    async FilterBlog(tags, likeLowerRange, viewLowerRange) {
+        try {
+            const foundBlog = await this.blogRepository.FilterBlog(tags, likeLowerRange, viewLowerRange)
+            return foundBlog
+        } catch(err) {
+            throw new Error("error while filtering blogs")
+        }
     }
-
+    
     async SearchBlog(title, author) {
         try {
             const foundBlogs = await this.blogRepository.SearchBlog(title, author)

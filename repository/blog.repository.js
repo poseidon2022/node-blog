@@ -91,7 +91,12 @@ class BlogRepository {
     }
 
     FilterBlog(tags, likeLowerRange, viewLowerRange) {
+        try {
 
+        } catch(err) {
+            console.error(err.message)
+            throw new Error(err.message)
+        }
     }
 
     async SearchBlog(title, author) {

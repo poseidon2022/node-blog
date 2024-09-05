@@ -89,7 +89,7 @@ class BlogController {
 
     async FilterBlog(req, res) {
         //tags, like_lower_range, view_lower_range
-        let {tags, like_lower_range, view_lower_Range} = req.body
+        let {tags, like_lower_range, view_lower_range} = req.body
         tags = tags || []
         like_lower_range = like_lower_range || 0
         view_lower_range = view_lower_range || 0
