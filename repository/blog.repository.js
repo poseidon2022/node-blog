@@ -97,9 +97,10 @@ class BlogRepository {
     async SearchBlog(title, author) {
         try {
             let foundBlog = {}
-            if (title != "" && author != "") {
+            console.log(title)
+            if (title && author) {
                 foundBlog = await Blog.find({$or : [{title : {$regex : new RegExp(title, 'i')}}, {author : {$regex : new RegExp(author, 'i')}}]})
-            } else if (title == "" && author != "") {
+            } else if (!title && author) {
                 foundBlog = await Blog.find({author : {$regex : new RegExp(author, 'i')}})
             } else {
                 foundBlog = await Blog.find({title : {$regex : new RegExp(title, 'i')}})
