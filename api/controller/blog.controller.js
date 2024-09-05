@@ -87,9 +87,22 @@ class BlogController {
 
     }
 
-    // TODO
-    FilterBlog(req, res) {
-
+    async FilterBlog(req, res) {
+        //tags, like_lower_range, view_lower_range
+        let {tags, like_lower_range, view_lower_Range} = req.body
+        tags = tags || []
+        like_lower_range = like_lower_range || 0
+        view_lower_range = view_lower_range || 0
+        try {
+            const foundBlog = await this.blogUseCase.FilterBlog(tags, like_lower_range, view_lower_range)
+            res.status(200).json({message : foundBlog})
+            
+        } catch(err) {
+            if (err.message == "No blogs found") {
+                res.status(204).json({message : err.message})
+            }
+            res.status(500).json({message : "internal server error"})
+        }
     }
 
     async SearchBlog(req, res) {

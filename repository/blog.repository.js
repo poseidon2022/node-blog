@@ -90,7 +90,7 @@ class BlogRepository {
         }
     }
 
-    FilterBlog(tags, likeLowerRange, viewLowerRange, date) {
+    FilterBlog(tags, likeLowerRange, viewLowerRange) {
 
     }
 
