@@ -80,6 +80,10 @@ class BlogController {
     async GetAllBlogs(req, res) {
         const limit = parseInt(req.query.limit, 10) || 10
         const page = parseInt(req.query.page, 10) || 1
+
+        if (page <= 0 || limit <= 0) {
+            res.status(400).json({error : "page or limit patams invalid"})
+        }
         try {
             const allBlogs = await this.blogUseCase.GetAllBlogs(limit, page) 
             res.json({message : allBlogs})
