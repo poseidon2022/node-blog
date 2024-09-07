@@ -66,7 +66,11 @@ class BlogRepository {
             }
 
             allBlogs.paginationMetaData = paginationMetaData
-            return allBlogs
+            const finalResult = {
+                blogs : allBlogs,
+                meta_data : paginationMetaData
+            }
+            return finalResult
 
         } catch(err) {
             console.error(err.message)
