@@ -54,7 +54,18 @@ class BlogRepository {
     
    async GetAllBlogs(limit, page) {
         try {
-            const allBlogs = await Blog.find()
+            const offset = (page - 1) * limit
+            const allBlogs = await Blog.find().skip(offset).limit(limit)
+            const totalDocuments = await Blog.countDocuments({})
+            const totalPages = Math.ceil(totalDocuments / limit)
+            const currentPage = (offset / limit) + 1
+            const paginationMetaData = {
+                total_documents : totalDocuments,
+                total_pages : totalPages,
+                current_page : currentPage
+            }
+
+            allBlogs.paginationMetaData = paginationMetaData
             return allBlogs
 
         } catch(err) {

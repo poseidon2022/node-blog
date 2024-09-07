@@ -49,7 +49,7 @@ class BlogUseCase {
 
     async GetAllBlogs(limit, page) {
         try {
-            const allBlogs = await this.blogRepository.GetAllBlogs()
+            const allBlogs = await this.blogRepository.GetAllBlogs(limit, page)
             return allBlogs
         } catch(err) {
             console.log(err)
