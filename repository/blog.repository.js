@@ -52,7 +52,7 @@ class BlogRepository {
 
     }
     
-   async GetAllBlogs() {
+   async GetAllBlogs(limit, page) {
         try {
             const allBlogs = await Blog.find()
             return allBlogs

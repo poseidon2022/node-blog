@@ -47,7 +47,7 @@ class BlogUseCase {
         }
     }
 
-    async GetAllBlogs() {
+    async GetAllBlogs(limit, page) {
         try {
             const allBlogs = await this.blogRepository.GetAllBlogs()
             return allBlogs

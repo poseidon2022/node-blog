@@ -75,9 +75,13 @@ class BlogController {
         }
     }
 
+
+    //let us implement pagination without the paginate v2 library
     async GetAllBlogs(req, res) {
+        const limit = parseInt(req.query.limit, 10) || 10
+        const page = parseInt(req.query.page, 10) || 1
         try {
-            const allBlogs = await this.blogUseCase.GetAllBlogs() 
+            const allBlogs = await this.blogUseCase.GetAllBlogs(limit, page) 
             res.json({message : allBlogs})
         }
         catch(err) {
