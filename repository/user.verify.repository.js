@@ -7,7 +7,7 @@ class SignupRepository {
                 throw new Error("user with the specified email already exists")
             }
 
-            const storedOtp = Otp.find({email})
+            const storedOtp = Otp.find({email}).sort({created_at : -1}).limit(1)
             if (storedOtp != otp) {
                 throw new Error("invalid otp")
             }
