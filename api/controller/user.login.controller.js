@@ -34,12 +34,13 @@ class LoginController {
                 email : email,
                 user_id : foundUser._id
             }
+
             const accessToken = generateAccessToken(tokenization_parameters)
             const refreshToken = generateRefreshToken(tokenization_parameters)
             await this.loginUseCase.RefreshToken(email, refreshToken)
-            
+
             res
-            .cookie('refreshTOken', refreshToken, {httpOnly : true, sameSite : strict})
+            .cookie('refreshToken', refreshToken, {httpOnly : true, sameSite : 'strict'})
             .header('Authorization', accessToken)
             .json({
                 success : true,
