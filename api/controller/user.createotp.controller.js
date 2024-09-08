@@ -1,3 +1,4 @@
+const generateOTP = require("../utils/otp.js")
 class OtpController {
     constructor(otpUseCase) {
         this.otpUseCase = otpUseCase
@@ -7,9 +8,8 @@ class OtpController {
         //create otp and send email here
         const {email} = req.body
         try {
-            const createdOtp = await this.otpUseCase.CreateOtp(email)
-            const otp = createdOtp.otp
-            
+            const otp = generateOTP()
+            const createdOtp = await this.otpUseCase.CreateOtp(otp, email)
             //the email sending functionality here now
             res.status(200).json({
                 success : true,
