@@ -3,7 +3,7 @@ const Refresh = require("../models/refresh.model")
 class LoginRepository {
     async Login(email) {
         try {
-            const foundUser = await User.find({email})
+            const foundUser = await User.findOne({email})
             return foundUser
         } catch(err) {
             throw new Error("error while fetching user from the Database")

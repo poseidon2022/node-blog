@@ -24,15 +24,13 @@ class LoginController {
             } 
 
             const hashedPassword = foundUser.password
-            await bcrypt.compare(password,hashedPassword, (err, result) => {
-                if (err) {
-                    throw new Error("invalid credentials")
-                }
-            })
+            console.log(foundUser)
+            console.log(hashedPassword, password)
+            await bcrypt.compare(password,hashedPassword)
 
             const tokenization_parameters = {
                 email : email,
-                user_id : foundUser._id
+                user_id : foundUser._id.toString()
             }
 
             const accessToken = generateAccessToken(tokenization_parameters)
