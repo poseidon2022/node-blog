@@ -12,3 +12,5 @@ class SignupUseCase {
         }
     }
 }
+
+module.exports = SignupUseCase

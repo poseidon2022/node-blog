@@ -1,13 +1,21 @@
 const OtpController = require("../controller/user.createotp.controller")
 const OtpUseCase = require("../../usecase/user.createotp.usecase")
 const OtpRepository = require("../../repository/user.createotp.repository")
+const SignupController = require("../controller/user.verify.controller")
+const SignupUseCase = require("../../usecase/user.veriify.usecase")
+const SignupRepository = require("../../repository/user.verify.repository")
+
 
 const router = require("express").Router()
 
 const otpRepository = new OtpRepository()
 const otpUseCase = new OtpUseCase(otpRepository)
 const otpController = new OtpController(otpUseCase)
+const signupRepository = new SignupRepository()
+const signupUseCase = new SignupUseCase(signupRepository)
+const signupController = new SignupController(signupUseCase)
 
 router.post("/generate-otp", (req,res) => otpController.CreateOtp(req, res))
+router.post("/signup", (req, res) => signupController.Signup(req, res))
 
 module.exports = router
