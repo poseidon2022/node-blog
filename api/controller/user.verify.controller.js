@@ -11,15 +11,15 @@ class SignupController {
                 success : false,
                 message : "invalid request format, required information missing"
             })
+        }
+        try {
             const hashedPwd = await bcrypt.hash(password, 10)
-            const newUser = await this.signupUseCase.Signup(name,email,hashedPwd, otp)
+            const newUser = await this.signupUseCase.Signup(name,email,hashedPwd,otp)
             res.status(200).json({
                 success : true,
                 message : "user created successfully",
                 user : newUser
             })
-        }
-        try {
         } catch(err) {
             res.status(500).json({
                 success : false,

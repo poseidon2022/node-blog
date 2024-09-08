@@ -12,10 +12,6 @@ const userSchema = new mongoose.Schema({
         type : String,
         required : true
     }, 
-    otp : {
-        type : String,
-        required : true
-    }
 }, {timestamp:true})
 
 const User = mongoose.model("users", userSchema)

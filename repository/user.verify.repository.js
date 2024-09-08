@@ -3,16 +3,17 @@ const User = require("../models/user.model")
 class SignupRepository {
     async Signup(name, email, password, otp) {
         try {
-            if (await User.find({email})) {
+            const foundUser = await User.findOne({email})
+            if (foundUser) {
                 throw new Error("user with the specified email already exists")
             }
 
-            const storedOtp = Otp.find({email}).sort({created_at : -1}).limit(1)
-            if (storedOtp != otp) {
-                throw new Error("invalid otp")
+            const storedOtp = await Otp.find({email}).sort({created_at : -1}).limit(1)
+            if (storedOtp.length == 0 || storedOtp[0].otp !== otp) {
+                throw new Error("invalid otp");
             }
 
-            const createdUser = await User.create({name, email, password, otp})
+            const createdUser = await User.create({name, email, password})
             return createdUser
 
         } catch(err) {
