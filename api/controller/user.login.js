@@ -36,6 +36,8 @@ class LoginController {
             }
             const accessToken = generateAccessToken(tokenization_parameters)
             const refreshToken = generateRefreshToken(tokenization_parameters)
+            await this.loginUseCase.RefreshToken(email, refreshToken)
+            
             res
             .cookie('refreshTOken', refreshToken, {httpOnly : true, sameSite : strict})
             .header('Authorization', accessToken)
@@ -51,3 +53,5 @@ class LoginController {
         }
     }
 }
+
+module.exports = LoginController
