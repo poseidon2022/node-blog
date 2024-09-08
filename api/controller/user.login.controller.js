@@ -24,8 +24,6 @@ class LoginController {
             } 
 
             const hashedPassword = foundUser.password
-            console.log(foundUser)
-            console.log(hashedPassword, password)
             await bcrypt.compare(password,hashedPassword)
 
             const tokenization_parameters = {
