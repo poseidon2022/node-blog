@@ -30,6 +30,19 @@ class LoginController {
                 }
             })
 
+            const tokenization_parameters = {
+                email : email,
+                user_id : foundUser._id
+            }
+            const accessToken = generateAccessToken(tokenization_parameters)
+            const refreshToken = generateRefreshToken(tokenization_parameters)
+            res
+            .cookie('refreshTOken', refreshToken, {httpOnly : true, sameSite : strict})
+            .header('Authorization', accessToken)
+            .json({
+                success : true,
+                message : "user logged in successfully"
+            })
         } catch(err) {
             res.status(500).json({
                 success : false,
