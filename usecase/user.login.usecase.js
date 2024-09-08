@@ -11,6 +11,14 @@ class LoginUseCase {
             throw new Error(err.message)
         }
     }
+
+    async RefreshToken(email, refresh_token) {
+        try {
+            await this.loginRepository.RefreshToken(email, refresh_token)
+        } catch(err) {
+            throw new Error(err.message)
+        }
+    }
 }
 
 module.exports = LoginUseCase
