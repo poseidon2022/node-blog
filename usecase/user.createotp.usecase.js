@@ -12,3 +12,5 @@ class OtpUseCase {
         }
     }
 }
+
+module.exports = OtpUseCase

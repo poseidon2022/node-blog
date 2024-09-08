@@ -10,3 +10,5 @@ class OtpRepository {
         }
     }
 }
+
+module.exports = OtpRepository
