@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+require("dotenv").config()
 const refreshSchema = new mongoose.Schema({
     email : {
         type : String,
@@ -10,7 +11,8 @@ const refreshSchema = new mongoose.Schema({
     }, 
     created_at : {
         type : Date,
-        default : Date.now
+        expires : process.env.REFRESH_EXPIRY,
+        default : Date.now,
     }
 })
 

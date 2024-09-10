@@ -8,6 +8,7 @@ const blogRepository = new BlogRepository()
 const blogUseCase = new BlogUseCase(blogRepository)
 const blogController = new BlogController(blogUseCase)
 
+
 router.post("/", (req, res) => blogController.CreateBlog(req, res))
 router.patch("/:blog_id", (req, res) => blogController.UpdateBlog(req, res))
 router.delete("/:blog_id", (req, res) => blogController.DeleteBlog(req, res))
