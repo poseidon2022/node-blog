@@ -18,7 +18,7 @@ class RefreshTokenController {
         
         try {
             const storedRefreshToken = await this.refreshTokenUseCase(user_email)
-            if (refreshToken != storedRefreshToken) {
+            if (refreshToken != storedRefreshToken.refresh_token) {
                 res.status(403).json({
                     success : false,
                     message : "invalid refresh token"
