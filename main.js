@@ -7,6 +7,7 @@ const commentRouter = require("./api/router/blog.comment.router.js")
 const likeRouter = require("./api/router/blog.like.router.js")
 const ratingRouter = require("./api/router/blog.rating.router.js")
 const userRouter = require("./api/router/user.router.js")
+const refreshRouter = require("./api/router/refresh.router.js")
 
 mongoose.connect(process.env.DATABASEURI)
 .then(() => {
@@ -25,6 +26,7 @@ app.use("/api/blog", commentRouter)
 app.use("/api/blog", likeRouter)
 app.use("/api/blog", ratingRouter)
 app.use("/api/user", userRouter)
+app.use("/api/user", refreshRouter)
 app.listen(PORT, () => {
     console.log(`app running on port ${PORT}`)
 })
