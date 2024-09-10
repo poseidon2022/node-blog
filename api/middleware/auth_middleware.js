@@ -29,18 +29,17 @@ class AuthenticationMiddleWare {
             } 
 
             try {
-                const decodedUser = jwt.verify(refreshToken, process.env.JWT_SECRET)
-                const accessToken = generateAccessToken(decodedUser)
-                const refreshToken = generateRefreshToken(decodedUser)
-                await this.loginRepository.RefreshToken(email, refreshToken)
+                const decoded = jwt.verify(refreshToken, process.env.JWT_SECRET)
+                const accessToken = generateAccessToken(decoded)
+                const refreshToken = generateRefreshToken(decoded)
+                await this.loginRepository.RefreshToken(decoded.user.email, refreshToken)
                 return res
                     .header("Authorization", accessToken)
                     .cookies("refreshToken", refreshToken, {httpOnly : true, sameSite : 'strict'})
                     .json({
                         success : true,
-                        message : "user authorized successsfully"
+                        message : decoded.user
                     })
-                next()
             } catch(err) {
                 res.status(400).json({
                     success : false,
