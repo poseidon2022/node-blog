@@ -18,7 +18,7 @@ class AuthenticationMiddleWare {
 
         try {
             const decoded = jwt.verify(accessToken, process.env.JWT_SECRET)
-            req.user = decoded
+            req.user = decoded.user
             next()
         } catch(err) {
             if (!refreshToken) {
@@ -30,8 +30,8 @@ class AuthenticationMiddleWare {
 
             try {
                 const decoded = jwt.verify(refreshToken, process.env.JWT_SECRET)
-                const accessToken = generateAccessToken(decoded)
-                const refreshToken = generateRefreshToken(decoded)
+                const accessToken = generateAccessToken(decoded.user)
+                const refreshToken = generateRefreshToken(decoded.user)
                 await this.loginRepository.RefreshToken(decoded.user.email, refreshToken)
                 return res
                     .header("Authorization", accessToken)
