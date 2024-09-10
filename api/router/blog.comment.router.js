@@ -2,9 +2,11 @@ const BlogCommentController = require("../controller/blog.comment.controller")
 const BlogCommentUseCase = require("../../usecase/blog.comment.usecase")
 const BlogCommentRepository = require("../../repository/blog.comment.repository")
 const BlogRepository = require("../../repository/blog.repository")
+const authenticate = require("../utils/createMiddlewareInstance")
 const express = require("express")
 
 const router = express.Router()
+router.use(authenticate)
 
 
 const blogCommentRepository = new BlogCommentRepository()

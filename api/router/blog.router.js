@@ -3,6 +3,9 @@ const router = express.Router()
 const BlogRepository = require("../../repository/blog.repository")
 const BlogUseCase = require("../../usecase/blog.usecase")
 const BlogController = require("../controller/blog.controller")
+const authenticate = require("../utils/createMiddlewareInstance")
+
+router.use(authenticate)
 
 const blogRepository = new BlogRepository()
 const blogUseCase = new BlogUseCase(blogRepository)

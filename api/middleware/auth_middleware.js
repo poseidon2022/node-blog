@@ -6,6 +6,7 @@ class AuthenticationMiddleWare {
     constructor(loginRepository) {
         this.loginRepository = loginRepository
     }
+    
     authenticate = async (req, res, next) => {
         const accessToken = req.headers['authorization']
         const refreshToken = req.cookies["refreshToken"]

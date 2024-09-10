@@ -3,8 +3,10 @@ const BlogLikeUseCase = require("../../usecase/blog.like.usecase")
 const BlogLikeRepository = require("../../repository/blog.like.repository")
 const BlogRepository = require("../../repository/blog.repository")
 const express = require("express")
+const authenticate = require("../utils/createMiddlewareInstance")
 
 const router = express.Router()
+router.use(authenticate)
 
 
 const blogLikeRepository = new BlogLikeRepository()
