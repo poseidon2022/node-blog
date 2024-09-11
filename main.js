@@ -1,4 +1,5 @@
 const express = require("express")
+const cookieParser = require("cookieparser")
 const cors = require("cors")
 require("dotenv").config()
 const mongoose = require("mongoose")
@@ -19,6 +20,7 @@ mongoose.connect(process.env.DATABASEURI)
 const app = express()
 app.use(cors())
 app.use(express.json())
+app.use(cookieParser)
 
 const PORT = process.env.PORT || 3000
 app.use("/api/blog", blogRouter)

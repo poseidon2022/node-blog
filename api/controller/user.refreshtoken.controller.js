@@ -7,8 +7,11 @@ class RefreshTokenController {
     }
 
     async RefreshAccessToken(req, res) {
+        console.log(req.cookies)
         const refreshToken = req.cookies["refreshToken"]
         const user_email = req.user.email
+
+        console.log(user_email)
         if (!refreshToken) {
             res.status(403).json({
                 success : false,
